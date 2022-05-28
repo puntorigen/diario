@@ -251,9 +251,14 @@
     x_console.table({ data:stats, title:'Stats', color:'dim', titleColor:'white' });
     console.log(`\n`);
     //@TODO insert records to DB
-    data.forEach(async (row)=>{
-
+    /*
+    let validRows = [];
+    data.forEach((row,idx)=>{
+        if (row.objectID && row.objectID!='') {
+            validRows.push(idx);
+        }
     });
+    data = validRows;*/
     //db.exec('INSERT INTO records(name,extra,topic,group,cve,date,pdf_url,pdf_text,pdf_json) VALUES()');
     //send to algolia servers
     x_console.title({ title:`Upload to Algolia`, color:'blue' });
@@ -263,7 +268,7 @@
     const index = client.initIndex(process.env.ALGOLIA_INDEX);
     x_console.outT({ prefix:'Algolia', message:`sending ${data.length} records to Algolia ..`, color:'yellow'});
     try {
-        await index.saveObjects(data);
+        await index.saveObjects(data,{'autoGenerateObjectIDIfNotExist': true});
     } catch(err) {
         x_console.out({ message:`Error sending data`, color:'brightRed', data:err });
     }
