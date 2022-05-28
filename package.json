@@ -1,0 +1,25 @@
+{
+  "name": "diario",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@concepto/console": "^1.2.67",
+    "algoliasearch": "^4.13.1",
+    "axios": "^0.27.2",
+    "better-sqlite3": "^7.5.3",
+    "cheerio": "^1.0.0-rc.11",
+    "count-words": "^1.0.13",
+    "dayjs": "^1.11.2",
+    "dotenv": "^16.0.1",
+    "download-file-with-progressbar": "^1.2.3",
+    "pdf-parse": "^1.1.1",
+    "tmp": "^0.2.1"
+  }
+}
