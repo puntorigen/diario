@@ -230,7 +230,7 @@
     require('dotenv').config();
     x_console.title({ title:`Diario Oficial's Parser & Indexer`, color:'cyan', titleColor:'yellow' });
     const db = prepareDB();
-    const forDate = process.env.DATE.trim(); //23-05-2022 JOSE: change the date here (empty means today)
+    const forDate = (process.env.DATE)?process.env.DATE.trim():''; //23-05-2022 JOSE: change the date here (empty means today)
     x_console.out({ message:`Getting topics .. for date !${(forDate!='')?forDate:'today'}!`});
     const topics = await getTopics(forDate); //get all topics (and all versions of them)
     //const filteredTopics = topics.filter((i)=>i.name.toLocaleLowerCase().includes('normas')); //filter topics to search
