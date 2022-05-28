@@ -1,8 +1,7 @@
-# Diario Oficial - Autommatic Scrapper and Indexer
+# Diario Oficial - Scrapper and Indexer
 ![diario-logo](https://user-images.githubusercontent.com/57605485/170844197-e1ac9ed0-6719-4663-b01e-040409bc6b64.png)
 
-Extracts the all of the "diario oficial" web records for the given day (or today if empty) and saves them in the defined Angolia account. 
-Works by defining an .env file within root with the following variables:
+Extracts the all of "diario oficial" web records for the given day (or today if empty) and saves them in the defined Angolia account. Works by defining an .env file within root (or env variables) with the following variables:
 
 ```env
 ALGOLIA_APP_ID="YOUR ANGOLIA APPID"
