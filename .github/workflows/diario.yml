@@ -1,0 +1,28 @@
+name: Diario daily extraction
+
+on:
+  schedule:
+    # runs every day at 1am UTC
+    - cron: "0 1 * * *"
+
+jobs:
+  process:
+    name: Daily extraction
+    runs-on: macos-latest
+    steps:
+      - name: Checks out
+        uses: actions/checkout@v2
+      - name: Installs nodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      
+      - name: Installs packages and runs extraction
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+          ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX }}
+          MAX_RECORDS_PER_TOPIC: ${{ secrets.MAX_RECORDS_PER_TOPIC }}
+        run: |
+          yes | npm install
+          node index.js
