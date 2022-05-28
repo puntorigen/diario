@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "extract": "node index.js"
+    "extract": "node index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",

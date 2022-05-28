@@ -21,5 +21,5 @@ Note: Angolia charges aprox 1,5 usd per 1000 records over 10.000, so the free ac
 Just checkout this repo and run:
 ```bash
 npm install
-npm run start
+npm run extract
 ```
