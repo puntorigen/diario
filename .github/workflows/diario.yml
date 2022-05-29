@@ -15,7 +15,7 @@ jobs:
       - name: Installs nodeJS
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '16.13.0'
       
       - name: Installs packages and runs extraction
         env:
@@ -24,5 +24,5 @@ jobs:
           ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX }}
           MAX_RECORDS_PER_TOPIC: ${{ secrets.MAX_RECORDS_PER_TOPIC }}
         run: |
-          yes | npm install
+          npm install --force
           node index.js
