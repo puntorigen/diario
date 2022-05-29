@@ -1,18 +1,8 @@
 !(async()=>{
-    //PoC: index companies of the day and their PDF on an sqlite DB
-    /* 
-    indexation steps: (this file or command)
-        0) prepare the DB & tables
-        1) build the url with current date
-        2) extract the companies with their PDF
-        3) download & parse each PDF and extract its info as text
-        4) add the data to the sqlite DB (we can replace it with a remote DB later)
+    //PoC: web scrapper of www.diariooficial.interior.gob.cl
+    //get entries and parse PDF files, then save data to an Algolia account
+    //@todo refactor as a class
 
-    search steps:
-        1) read the sqlite DB
-        2) search the DB for the given parameters
-        3) call a webhook (could be defined on a .env file)
-    */
     // import libraries
     const axios = require('axios'), cheerio = require('cheerio');
     const x_console = new (require('@concepto/console'))();
@@ -142,8 +132,8 @@
                 wordCount: wordKeys.length, 
                 wordList: wordKeys.join(',') 
             };
-            if (resp.text.length>100000) {
-                resp.text = resp.wordList;
+            if (resp.text.length>100000) { //angolia supports max 100k data per field
+                resp.text = resp.text.substring(0,100000); ///resp.wordList;
                 resp.shorted = true;
             }
             return resp;
@@ -233,7 +223,7 @@
     const forDate = (process.env.DATE)?process.env.DATE.trim():''; //23-05-2022 JOSE: change the date here (empty means today)
     x_console.out({ message:`Getting topics .. for date !${(forDate!='')?forDate:'today'}!`});
     const topics = await getTopics(forDate); //get all topics (and all versions of them)
-    //const filteredTopics = topics.filter((i)=>i.name.toLocaleLowerCase().includes('normas')); //filter topics to search
+    //const filteredTopics = topics.filter((i)=>i.name.toLocaleLowerCase().includes('normas')); //narrow topics to specific strings
     //x_console.out({ message:'Topics .. ', data:topics});
     const data = await scrapeData(topics,process.env.MAX_RECORDS_PER_TOPIC);
     //show console stats per topic
@@ -251,16 +241,9 @@
     x_console.table({ data:stats, title:'Stats', color:'dim', titleColor:'white' });
     console.log(`\n`);
     //@TODO insert records to DB
-    /*
-    let validRows = [];
-    data.forEach((row,idx)=>{
-        if (row.objectID && row.objectID!='') {
-            validRows.push(idx);
-        }
-    });
-    data = validRows;*/
+    //todo: test if cve value exists on DB before inserting
     //db.exec('INSERT INTO records(name,extra,topic,group,cve,date,pdf_url,pdf_text,pdf_json) VALUES()');
-    //send to algolia servers
+    //send data to algolia servers
     x_console.title({ title:`Upload to Algolia`, color:'blue' });
     //send data to algolia.com servers
     const algoliasearch = require('algoliasearch');
