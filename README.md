@@ -15,7 +15,7 @@ MAX_RECORDS_PER_TOPIC=1000 #(max records to process per topic)
 DATE=20-05-2022
 ```
 
-Note: Angolia charges aprox 1,5 usd per 1000 records over 10.000, so the free account gives you aprox 10 days of data for free.
+Note: Angolia charges aprox 1,5 usd per 1000 records over 10.000, so the free account gives you aprox 10 days of data for free. You can check the results of this repo on: https://bit.ly/3z3wcdU
 
 ## Setup
 Just checkout this repo and run:
