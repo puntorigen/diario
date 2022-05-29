@@ -2,8 +2,8 @@ name: Diario daily extraction
 
 on:
   schedule:
-    # runs every day at 1am UTC
-    - cron: "0 1 * * *"
+    # runs every day at 1am UTC (5mins until it works)
+    - cron: "*/5 * * * *"
 
 jobs:
   process:
